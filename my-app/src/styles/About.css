@@ -1,0 +1,22 @@
+.about__page{
+    width: 1210px;
+    height: 1200px;
+    padding: 6px;
+    border-radius: 10px;
+    background-image: url(/img/background.jpg);
+  }
+  
+  .about{
+    text-align: center;
+    margin: 80px auto;
+    font-family: "Grand Stylus";
+    text-transform: uppercase;
+    color:white;
+    font-size: 170px;
+    font-weight: 700;
+    text-shadow: rgb(224, 221, 25) 2px 0 30px;;
+  }
+  @font-face {
+    font-family: "Grand Stylus";
+    src: url(/img/Grand\ Stylus.ttf);
+  }

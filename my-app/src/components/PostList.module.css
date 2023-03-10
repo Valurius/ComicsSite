@@ -1,0 +1,12 @@
+.NotFound{
+    text-align: center;
+    color: white;
+}
+
+.title{
+    text-align: center;
+    color: white;
+    font-family:serif;
+    font-size: 80px;
+    letter-spacing: 2px;
+}
