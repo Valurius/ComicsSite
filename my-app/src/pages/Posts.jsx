@@ -1,10 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import PostService from "../API/PostService";
-import PostFilter from "../components/PostFilter";
-import PostForm from "../components/PostForm";
-import MyButton from "../components/UI/button/MyButton";
 import Loader from "../components/UI/Loader/Loader";
-import MyModal from "../components/UI/MyModal/MyModal";
 import Pagination from "../components/UI/pagination/Pagination";
 import { getPageCount } from "../components/utils/pages";
 import { useFetching } from "../hooks/useFetching";
@@ -12,15 +8,13 @@ import { usePosts } from "../hooks/usePosts";
 import PostList from "../components/PostList";
 import '../styles/App.css';
 import { useObserver } from "../hooks/useObserver";
-import MySelect from "../components/UI/select/MySelect";
 
 
 function Posts() {
   const [posts, setPosts] = useState([])
-  const [filter, setFilter] = useState({ sort: '', query: '' })
-  const [modal, setModal] = useState(false);
+  const [filter] = useState({ sort: '', query: '' })
   const [totalPages, setTotalPages] = useState(0);
-  const [limit, setLimit] = useState(10);
+  const [limit] = useState(10);
   const [page, setPage] = useState(1);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
   const lastElement = useRef()
@@ -40,11 +34,6 @@ function Posts() {
   useEffect(() => {
     fetchPosts(limit, page)
   }, [page, limit])
-
-  const createPost = (newPost) => {
-    setPosts([...posts, newPost])
-    setModal(false)
-  }
 
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
