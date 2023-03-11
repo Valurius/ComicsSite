@@ -8,13 +8,11 @@ namespace ComicsAPI.Controllers
     [ApiController]
     public class ComicsController : ControllerBase
     {
-        private readonly IBase<Comic> _comicsRepository;
-        private readonly IBase<ComicPhotos> _comicsPhotosRepository;
+        private readonly IComic _comicsRepository;
 
-        public ComicsController(IBase<Comic> comicsRepository, IBase<ComicPhotos> comicsPhotosRepository)
+        public ComicsController(IComic comicsRepository)
         {
             _comicsRepository = comicsRepository;
-            _comicsPhotosRepository = comicsPhotosRepository;
         }
 
         [HttpGet]
@@ -32,9 +30,9 @@ namespace ComicsAPI.Controllers
         {
             var comic = await _comicsRepository.GetById(id);
 
-            if (comic == null) { return Results.NotFound("Комикс не найден"); }
+            if (comic.Result == false) { return Results.NotFound(comic.Message); }
 
-            return Results.Ok(comic);
+            return Results.Ok(comic.Value);
         }
 
         [HttpPost]
@@ -43,18 +41,8 @@ namespace ComicsAPI.Controllers
         {
             var result = await _comicsRepository.Add(comic);
 
-            return result ?  Results.Ok("Комикс успешно добавлен") : Results.BadRequest("Произошла ошибка при добавлении комикса");
+            return result.Result ?  Results.Ok(result.Message) : Results.BadRequest(result.Message);
         }
-
-        [HttpPost]
-        [Route("addPhotos")]
-        public async Task<IResult> Post(ComicPhotos comicPhotos)
-        {
-            var result = await _comicsPhotosRepository.Add(comicPhotos);
-
-            return result ? Results.Ok("Фото комикса успешно добавлены") : Results.BadRequest("Произошла ошибка при добавлении фото комикса");
-        }
-
 
         [HttpDelete]
         [Route("delete")]
@@ -62,7 +50,7 @@ namespace ComicsAPI.Controllers
         {
             var result = await _comicsRepository.DeleteById(id);
 
-            return result ? Results.Ok("Комикс успешно удален") : Results.BadRequest("Произошла ошибка при удалении комикса");
+            return result.Result ? Results.Ok(result.Message) : Results.BadRequest(result.Message);
         }
 
         [HttpPut]
@@ -71,7 +59,7 @@ namespace ComicsAPI.Controllers
         {
             var result = await _comicsRepository.Update(comic);
 
-            return result ? Results.Ok("Комикс успешно обновлен") : Results.BadRequest("Произошла ошибка при обновлении комикса");
+            return result.Result ? Results.Ok(result.Message) : Results.BadRequest(result.Message);
         }
     }
 }

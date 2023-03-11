@@ -11,6 +11,6 @@ namespace ComicsAPI.Data
         }
 
         public DbSet<Comic> Comics { get; set; }
-        public DbSet<ComicPhotos> ComicsPhotos { get; set; }
+        public DbSet<ComicPhoto> ComicsPhotos { get; set; }
     }
 }

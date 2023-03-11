@@ -10,6 +10,6 @@ namespace ComicsAPI.Models
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public string PreviewPhotoName { get; set; } = null!;
-        public virtual List<ComicPhotos>? ComicPhotos { get; set; }
+        public virtual List<ComicPhoto>? ComicPhotos { get; set; }
     }
 }

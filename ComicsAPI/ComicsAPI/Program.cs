@@ -17,8 +17,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //Add services
-builder.Services.AddTransient<IBase<Comic>, ComicsRepository>();
-builder.Services.AddTransient<IBase<ComicPhotos>, ComicPhotoRepository>();
+builder.Services.AddTransient<IComic, ComicRepository>();
+builder.Services.AddTransient<IComicPhoto, ComicPhotoRepository>();
 
 var app = builder.Build();
 

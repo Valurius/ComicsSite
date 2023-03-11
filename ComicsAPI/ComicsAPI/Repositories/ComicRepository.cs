@@ -5,46 +5,46 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ComicsAPI.Repositories
 {
-    public class ComicsRepository : IBase<Comic>
+    public class ComicRepository : IComic
     {
         private readonly AppDbContext _db;
 
-        public ComicsRepository(AppDbContext db)
+        public ComicRepository(AppDbContext db)
         {
             _db = db;
         }
 
-        public async Task<bool> Add(Comic comic)
+        public async Task<Response> Add(Comic comic)
         {
             try
             {
                 await _db.Comics.AddAsync(comic);
                 await _db.SaveChangesAsync();
 
-                return true;
+                return new Response("Комикс успешно добавлен",true);
             }
-            catch 
+            catch (Exception ex) 
             {
-                return false;
+                return new Response(ex.Message, false);
             }
         }
 
-        public async Task<bool> DeleteById(int id)
+        public async Task<Response> DeleteById(int id)
         {
             var comic = await _db.Comics.FirstOrDefaultAsync(x => x.ComicId == id);
 
-            if (comic == null) { return false; };
+            if (comic == null) { return new Response("Комикс не найден", false); };
 
             try
             {
                 _db.Remove(comic);
                 await _db.SaveChangesAsync();
 
-                return true;
+                return new Response("Комикс успешно удален", true);
             }
-            catch 
-            { 
-                return false;
+            catch (Exception ex)
+            {
+                return new Response(ex.Message, false);
             }
         }
 
@@ -53,13 +53,13 @@ namespace ComicsAPI.Repositories
             return await _db.Comics.Include(x => x.ComicPhotos).ToListAsync();
         }
 
-        public async Task<Comic> GetById(int id)
+        public async Task<Response> GetById(int id)
         {
             var comic = await _db.Comics.Include(x => x.ComicPhotos).FirstOrDefaultAsync(x => x.ComicId == id);
 
-            if(comic == null) { return comic; };// exeption
+            if(comic == null) { return new Response("Комикс не найден", false); };
 
-            return comic;
+            return new Response("Комикс найден", true, comic);
         }
 
         public async void Save()
@@ -67,11 +67,11 @@ namespace ComicsAPI.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public async Task<bool> Update(Comic oldComics)
+        public async Task<Response> Update(Comic oldComics)
         {
             var comic = await _db.Comics.FirstOrDefaultAsync(x => x.ComicId == oldComics.ComicId);
 
-            if (comic == null) { return false; }
+            if (comic == null) { return new Response("Комикс не найден", false); }
 
             _db.ChangeTracker.Clear();
 
@@ -81,11 +81,11 @@ namespace ComicsAPI.Repositories
 
                 await _db.SaveChangesAsync();
 
-                return true;
+                return new Response("Комикс успешно обновлен", true); ;
             }
-            catch
+            catch (Exception ex) 
             {
-                return false;
+                return new Response(ex.Message, false); ;
             }
         }
     }
