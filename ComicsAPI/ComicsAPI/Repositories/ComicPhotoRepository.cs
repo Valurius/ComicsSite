@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ComicsAPI.Repositories
 {
-    public class ComicPhotoRepository : IBase<ComicPhotos>
+    public class ComicPhotoRepository : IComicPhoto
     {
         private readonly AppDbContext _db;
 
@@ -14,60 +14,59 @@ namespace ComicsAPI.Repositories
             _db = db;
         }
 
-        public async Task<bool> Add(ComicPhotos item)
+        public async Task<Response> Add(ComicPhoto photo)
         {
             try
             {
-                await _db.ComicsPhotos.AddAsync(item);
+                await _db.ComicsPhotos.AddAsync(photo);
                 await _db.SaveChangesAsync();
 
-                return true;
+                return new Response("Фото комикса успешно добавлено", true);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                return new Response(ex.Message, false);
             }
         }
 
-        public Task<bool> DeleteById(int id)
+        public async Task<Response> DeleteById(int id)
         {
-            throw new NotImplementedException();
+            var comicPhoto = await _db.ComicsPhotos.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (comicPhoto == null) { return new Response("Фото комикса не найдено", false); };
+
+            try
+            {
+                _db.Remove(comicPhoto);
+                await _db.SaveChangesAsync();
+
+                return new Response("Фото комикса успешно удалено", true);
+            }
+            catch (Exception ex)
+            {
+                return new Response(ex.Message, false);
+            }
         }
 
-        public Task<List<ComicPhotos>> GetAll()
+        public async Task<Response> Update(ComicPhoto oldPhoto)
         {
-            throw new NotImplementedException();
-        }
+            var comicPhoto = await _db.ComicsPhotos.FirstOrDefaultAsync(x => x.Id == oldPhoto.Id);
 
-        public async Task<ComicPhotos> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async void Save()
-        {
-            await _db.SaveChangesAsync();
-        }
-
-        public async Task<bool> Update(ComicPhotos item)
-        {
-            var comicPhotos = await _db.ComicsPhotos.FirstOrDefaultAsync(x => x.Id == item.Id);
-
-            if (comicPhotos == null) { return false; }
+            if (comicPhoto == null) { return new Response("Фото комикса не найдено", false); }
 
             _db.ChangeTracker.Clear();
 
             try
             {
-                _db.Entry(comicPhotos).State = EntityState.Modified;
+                _db.Entry(oldPhoto).State = EntityState.Modified;
 
                 await _db.SaveChangesAsync();
 
-                return true;
+                return new Response("Фото комикса успешно обновлено", true); ;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                return new Response(ex.Message, false); ;
             }
         }
     }

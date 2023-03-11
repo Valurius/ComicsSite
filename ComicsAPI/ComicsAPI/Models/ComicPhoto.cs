@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ComicsAPI.Models
 {
-    public class ComicPhotos
+    public class ComicPhoto
     {
         [Key]
         public int Id { get; set; }
