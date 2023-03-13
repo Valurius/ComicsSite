@@ -2,6 +2,7 @@ using ComicsAPI.Data;
 using ComicsAPI.Repositories;
 using ComicsAPI.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,5 +34,16 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Add CORS
+app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyOrigin());
+
+// Add static files(photos)
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+    Path.Combine(Directory.GetCurrentDirectory(), "Images")),
+    RequestPath = "/Images"
+});
 
 app.Run();

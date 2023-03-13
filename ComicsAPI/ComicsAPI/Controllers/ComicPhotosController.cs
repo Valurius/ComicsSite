@@ -1,5 +1,6 @@
 ﻿using ComicsAPI.Models;
 using ComicsAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComicsAPI.Controllers
@@ -9,10 +10,39 @@ namespace ComicsAPI.Controllers
     public class ComicPhotosController : ControllerBase
     {
         private readonly IComicPhoto _comicPhotoRepository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ComicPhotosController(IComicPhoto comicPhotoRepository)
+        public ComicPhotosController(IComicPhoto comicPhotoRepository, IWebHostEnvironment webHostEnvironment)
         {
             _comicPhotoRepository = comicPhotoRepository;
+            _webHostEnvironment = webHostEnvironment;
+        }
+
+        [HttpPost]
+        [Route("savePhoto")]
+        public async Task<IResult> SavePhoto()
+        {
+            try
+            {
+                var httpRequest = Request.Form;
+                var postedFiles = httpRequest.Files;
+
+                foreach (var file in postedFiles)
+                {
+                    var phisicalPath = _webHostEnvironment.ContentRootPath + "/Images/" + file.FileName;
+
+                    using (var stream = new FileStream(phisicalPath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
+
+                return Results.Ok("Изображение успешно загружено");
+            }
+            catch (Exception)
+            {
+                return Results.BadRequest("Не удалось загрузить изображение.");
+            }
         }
 
         [HttpPost]
