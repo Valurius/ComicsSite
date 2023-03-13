@@ -4317,19 +4317,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\akope\\.nuget\\packages\\": {}
+    "C:\\Users\\arman\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "A:\\CSharpPROJECTS\\ComicsSite\\ComicsAPI\\ComicsAPI\\ComicsAPI.csproj",
+      "projectUniqueName": "D:\\6-ой семестр\\ComicsSite\\ComicsAPI\\ComicsAPI\\ComicsAPI.csproj",
       "projectName": "ComicsAPI",
-      "projectPath": "A:\\CSharpPROJECTS\\ComicsSite\\ComicsAPI\\ComicsAPI\\ComicsAPI.csproj",
-      "packagesPath": "C:\\Users\\akope\\.nuget\\packages\\",
-      "outputPath": "A:\\CSharpPROJECTS\\ComicsSite\\ComicsAPI\\ComicsAPI\\obj\\",
+      "projectPath": "D:\\6-ой семестр\\ComicsSite\\ComicsAPI\\ComicsAPI\\ComicsAPI.csproj",
+      "packagesPath": "C:\\Users\\arman\\.nuget\\packages\\",
+      "outputPath": "D:\\6-ой семестр\\ComicsSite\\ComicsAPI\\ComicsAPI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\akope\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\arman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4337,6 +4342,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

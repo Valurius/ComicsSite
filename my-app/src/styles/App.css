@@ -3,10 +3,11 @@
   padding: 0;
   box-sizing: border-box;
   font-family: monospace;
+  size: 250%;
 }
 
 body {
-  background-image: url(/img/back.jpg);
+  background-image: url(/public/img/back.jpg);
 }
 
 #root {
@@ -18,20 +19,9 @@ body {
 .App {
   width: 1210px;
   padding: 6px;
-  border-radius: 10px;
-  background-image: url(/img/background.jpg);
-}
-
-.post {
-  font-size: 18px;
-  background-color: rgb(210, 210, 210);
-  border-radius: 50px;
-  display: flex;
-  padding: 15px;
-  border: 2px solid black;
-  margin-top: 15px;
-  justify-content: space-between;
-  align-items: center;
+  border-radius: 20px;
+  background-image: url(/public/img/background.jpg);
+  box-shadow: 20px 0 20px -4px rgba(0, 0, 0, 0.8), -20px 0 8px -4px rgba(0, 0, 0, 0.8), 0 20px 8px -4px rgba(0, 0, 0, 0.8);
 }
 
 .post__btns {

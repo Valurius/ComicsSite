@@ -1,51 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import PostService from '../API/PostService';
-import Loader from '../components/UI/Loader/Loader';
-import { useFetching } from '../hooks/useFetching';
+import React from 'react';
+import '../styles/PostId.css';
 
 const PostIdPage = () => {
-    const params = useParams()
-    const [post, setPost] = useState({});
-    const [comments, setComments] = useState([]);
-
-    const [fetchPostById, isLoading] = useFetching(async (id) => {
-        const response = await PostService.getById(id)
-        setPost(response.data)
-    })
-
-    const [fetchComments, isCommsLoading] = useFetching(async (id) => {
-        const response = await PostService.getCommentsById(id)
-        setComments(response.data)
-    })
-
-    useEffect(() => {
-        fetchPostById(params.id)
-        fetchComments(params.id)
-    }, [])
-
-    console.log(params)
-    return (
-        <div>
-            <h1>ВЫ папук с ID = {params.id}</h1>
-            {isLoading
-                ? <Loader />
-                : <div>{post.id} {post.title}</div>
-            }
-            <h1>Тут комментарии</h1>
-            {isCommsLoading
-                ? <Loader />
-                : <div>
-                    {comments.map(comm =>
-                        <div key={comm.id}style={{marginTop: 15}}>
-                            <h5 >{comm.email}</h5>
-                            <div >{comm.body}</div>
-                        </div>
-                        )}
-                </div>
-            }
+    return(
+    <div className='App'>
+        <div className='comic'>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/0.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/1.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/2.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/3.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/4.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/5.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/6.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/7.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/8.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/9.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/10.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/11.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/12.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/13.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/14.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/15.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/16.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/17.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/18.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/19.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/20.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/21.jpg'></img>
+        <img className='comicImg' src='../comic/Amazing Spider-Man 1/22.jpg'></img>
         </div>
-    );
+    </div>
+    )
 };
 
 export default PostIdPage;

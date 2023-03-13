@@ -3,7 +3,7 @@
     height: 1200px;
     padding: 6px;
     border-radius: 10px;
-    background-image: url(/img/background.jpg);
+    background-image: url(/public/img/background.jpg);
   }
   
   .about{
@@ -14,9 +14,10 @@
     color:white;
     font-size: 170px;
     font-weight: 700;
-    text-shadow: rgb(224, 221, 25) 2px 0 30px;;
+    text-shadow: rgb(224, 221, 25) 2px 0 30px;
   }
   @font-face {
+    font-display: block;
     font-family: "Grand Stylus";
-    src: url(/img/Grand\ Stylus.ttf);
+    src: url(/public/img/Grand\ Stylus.ttf);
   }

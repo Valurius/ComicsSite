@@ -1,0 +1,27 @@
+body{
+    background-color: gray;
+}
+
+.comic{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.comicImg{
+    position: relative;
+    padding: 15px 0px;
+    width: 60%;
+    z-index: 1000;
+}
+
+.comicImg:hover{
+    margin: 100px;
+    transition: .6s;
+    transform: scale(1.2);
+}
+.comicImg:not(:hover){
+    transition: .6s;
+    transform: scale(1);
+}
