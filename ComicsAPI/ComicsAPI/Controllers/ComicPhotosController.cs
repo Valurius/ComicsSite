@@ -1,7 +1,5 @@
 ﻿using ComicsAPI.Models;
-using ComicsAPI.Repositories;
 using ComicsAPI.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComicsAPI.Controllers

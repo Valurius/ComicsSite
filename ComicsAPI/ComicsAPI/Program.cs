@@ -1,5 +1,4 @@
 using ComicsAPI.Data;
-using ComicsAPI.Models;
 using ComicsAPI.Repositories;
 using ComicsAPI.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
